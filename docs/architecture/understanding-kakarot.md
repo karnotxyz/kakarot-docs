@@ -1,39 +1,28 @@
 ---
-title: Kakarot zkEVM under the hood
+title: Kakarot zkEVM 在幕后运行
 sidebar_position: 2
 ---
 
-## Kakarot, the zkEVM built in Cairo
+## 在Cairo建造的zkEVM Kakarot
 
-Kakarot is a zkEVM built in [Cairo](https://www.cairo-lang.org/), the provable
-language that powers [Starknet](https://starkware.co/starknet/) and all the
-StarknetOS chains (also called CairoVM chains, or Starknet appchains). Kakarot
-is an Ethereum-compatible Layer 2, a
-[so-called zkRollup](https://ethereum.org/developers/docs/scaling/zk-rollups).
-Beyond compatibility, Kakarot strives to push more innovations to the L2 space,
-and to add new features such as native account abstraction to the EVM. Kakarot's
-driving ethos is to _Prove, Scale and Innovate_ 🥕.
+Kakarot 是一个在 [Cairo](https://www.cairo-lang.org/) 中构建的 zkEVM，这是一个可证明的语言，为 [Starknet](https://starkware.co/starknet/) 和所有 StarknetOS 链（也称为 CairoVM 链或 Starknet 应用链）提供支持。Kakarot 是一个与以太坊兼容的 Layer 2，一个所谓的 [zkRollup](https://ethereum.org/developers/docs/scaling/zk-rollups)。除了兼容性外，Kakarot 还致力于向 L2 领域推动更多创新，并添加新功能，如原生账户抽象到 EVM。Kakarot 的主导理念是“证明、扩展和创新” 🥕。
 
-In concrete terms, Kakarot is an Ethereum-compatible zk-Rollup:
 
-- Ethereum-compatible: use Kakarot and Ethereum in the same way.
-- Zero-Knowledge (zk): no compromise on security, maximized integrity derived
-  from maths.
-- Rollup: Enjoy lower costs than on Ethereum mainnet.
+具体而言，Kakarot 是一个与以太坊兼容的 zk-Rollup：
 
-For users:
+- 与以太坊兼容：以与以太坊相同的方式使用 Kakarot 和以太坊。
+- 零知识（zk）：不妥协于安全性，通过数学实现最大化的数据完整性。
+- Rollup：享受比以太坊主网更低的成本。
 
-- For end users, use Kakarot in the same way as Ethereum mainnet: interact with
-  dApps using any EVM wallet, e.g. Metamask or Rabby.
-- For developers and teams, you can build on Kakarot using the Ethereum
-  ecosystem's standard tools: Solidity or Vyper, Foundry, Hardhat, Etherjs etc.
+对于用户：
 
-Discover the Kakarot explorer and other useful links on the
-[survival guide](../survival-guide) page.
+- 对于终端用户，可以像使用以太坊主网一样使用 Kakarot：通过任何 EVM 钱包与 dApp 进行交互，例如 Metamask 或 Rabby。
+- 对于开发者和团队，您可以使用以太坊生态系统的标准工具构建 Kakarot：Solidity 或 Vyper、Foundry、Hardhat、Ether.js 等。
 
-Note: Kakarot is not a privacy chain. Zero-knowledge technologies can be used
-for two (non-excluding) purposes, Scaling or Privacy. Kakarot uses the former to
-scale Ethereum.
+在 [survival guide](../survival-guide) 页面上发现 Kakarot 浏览器和其他有用的链接。
+
+注意：Kakarot 不是一个隐私链。零知识技术可以用于两种（非排斥）目的，即扩展或隐私。Kakarot 使用前者来扩展以太坊。
+
 
 ## How does Kakarot work under the hood?
 

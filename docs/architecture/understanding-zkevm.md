@@ -1,180 +1,100 @@
 ---
-title: The concept of zkEVM
+title: zkEVM的概念
 sidebar_position: 1
 ---
 
-To grasp the concept of zkEVM, let's start by understanding what the Ethereum
-Virtual Machine (EVM) is.
+为了掌握zkEVM的概念，让我们首先了解什么是以太坊虚拟机(EVM)。
 
-## The Ethereum Virtual Machine (EVM)
+## 以太坊虚拟机(EVM)
 
-### EVM Overview
+### EVM 概述
 
-Starting from the
-[Ethereum Foundation definition](https://ethereum.org/developers/docs/evm#from-ledger-to-state-machine):
+从[以太坊基金会的定义](https://ethereum.org/developers/docs/evm#from-ledger-to-state-machine)开始:
 
-> Ethereum's state is a large data structure which holds not only all accounts
-> and balances, but a machine state, which can change from block to block
-> according to a pre-defined set of rules, and which can execute arbitrary
-> machine code. The specific rules of changing state from block to block are
-> defined by the EVM.
+> 以太坊的状态是一个大型数据结构，它不仅保存了所有账户
+> 而平衡，只是一种机器状态，它可以从一个区块改变到另一个区块
+> 根据一组预定义的规则，可以任意执行
+> 机器代码。从块到块改变状态的具体规则是
+> 由EVM定义。
 
-From the above we get that the Ethereum blockchain is a distributed state
-machine and that the
-[Ethereum Virtual Machine](https://ethereum.org/developers/docs/evm) is a
-software-based emulation of a physical computer (virtual machine) used to
-operate (compute state transitions) this blockchain.
+从上文我们可以看出，以太坊区块链是一个分布式状态机，而[以太坊虚拟机](https://ethereum.org/developers/docs/evm) 是对物理计算机（虚拟机）的基于软件的仿真，用于操作（计算状态转换）该区块链。
 
-Note that the EVM is a deterministic execution environment.
+需要注意的是，EVM 是一个确定性的执行环境。
 
-- Deterministic meaning that a smart contract will produce the same output given
-  the same input, regardless of which node in the network executes it. This is
-  essential for maintaining consensus across the network.
-- An execution environment i.e. where smart contracts are executed. Note that
-  each Ethereum node runs an EVM instance, allowing it to participate in
-  executing and validating smart contracts and transactions.
-  - For instance, Ethereum Validators run both a consensus client and an
-    execution client. This execution client is powered by an EVM implementation.
-    That way, validators _validate_ transactions by re-running them locally
-    before voting to ensure their correctness ✅!
+- 确定性是指，无论网络中的哪个节点执行智能合约，只要输入相同，就会产生相同的输出。这对于维持整个网络的共识至关重要。
+- 执行环境，即执行智能合约的地方。请注意，每个以太坊节点都运行一个 EVM 实例，允许它参与执行和验证智能合约和交易。
+  - 例如，以太坊验证器同时运行一个共识客户端和一个执行客户端。执行客户端由 EVM 实现提供支持。
+    这样，验证器就可以在本地重新运行交易，从而验证交易，以确保其正确性✅！
 
-TL;DR - the EVM is the common virtual computer used to run logic on the Ethereum
-network.
+TL;DR - EVM 是用于在以太坊网络上运行逻辑的通用虚拟计算机。
 
-### Architecture of the EVM
+### EVM 的架构
 
 ---
 
-Diagram - The EVM Illustrated by Takenobu:
+示意图 - Takenobu 绘制的 EVM 图：
 
 ![The EVM illustrated by Takenobu](../../static/diagrams/evm_takenobu.png)
-Source: The EVM illustrated,
+资料来源:EVM插图，
 https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf
 
 ---
 
-Let's use the image above from Takenobu to describe the machine architecture of
-the EVM.
+让我们用 Takenobu 提供的上图来描述一下 EVM 的机器结构。
 
-1. Virtual ROM: This contains the EVM code. Once smart contracts are deployed,
-   their code cannot be changed (proxy pattern notwithstanding 🧑‍🔬). Smart
-   contract code is said to be _immutable_ on Ethereum.
+1. 虚拟 ROM：包含 EVM 代码。一旦部署了智能合约、 其代码不可更改（尽管有代理模式 🧑‍🔬）。智能 合约代码在以太坊上被称为_不可变_。
 
-2. Program counter (PC): This keeps track of the position in the code that the
-   EVM is currently executing.
+2. 程序计数器 (PC)： 它记录 EVM 当前执行代码的位置。
 
-3. Gas available (Gas): Each operation in the EVM requires a certain amount of
-   "gas," which is a unit that measures the computational effort required. The
-   gas available field tracks how much gas is left for the transaction to
-   continue operating.
+3. 可用燃料（Gas）： EVM 中的每个操作都需要一定量的 "燃料"。"燃料"，它是衡量所需计算能力的单位。可用燃料可用气体字段跟踪交易还剩多少燃料才能继续运行。
 
-4. Machine state (µ): This is the volatile state of the machine which includes
-   the program counter, memory, stack, and more. It is volatile because it is
-   reset between transactions. It is not shared between intra-transaction calls
-   (e.g. if there are 3 different contracts calls within one transaction),
-   though this will change with
-   [transient storage](https://eips.ethereum.org/EIPS/eip-1153).
+4. 机器状态（µ）：这是机器的易失性状态，包括程序计数器、内存、栈等。它是易失性的，因为在交易之间会被重置。它不在交易内调用之间共享（例如，在一个交易中有 3 个不同的合约调用），尽管这将随着[瞬态存储](https://eips.ethereum.org/EIPS/eip-1153)的引入而改变。
 
-5. Stack: The EVM is a stack-based machine, which means that it uses a data
-   structure called a stack to store data. Operations in EVM code manipulate the
-   stack in various ways.
+5. 栈：EVM 是一种基于栈的机器，这意味着它使用一种称为栈的数据结构来存储数据。EVM 代码中的操作以各种方式操作栈。
 
-6. Memory: This is a temporary place to store data during execution. It is
-   volatile because it is reset between transactions or intra-transaction calls.
+6. 内存： 这是执行过程中存储数据的临时位置。它是易失性的，因为它会在事务或事务内部调用之间重置。
 
-7. (Account) Storage: This is a long-term storage that each account in Ethereum
-   has. Unlike memory, storage is persistent and remains between transactions
-   and even between sessions. This includes both Account Contracts (smart
-   contracts) and Externally Owned Accounts or EOAs (user accounts, like the
-   account in your Metamask wallet!).
+7. (账户）存储： 这是以太坊每个账户都有的长期存储。拥有的长期存储。与内存不同，存储是持久的，在不同的交易 甚至会话之间。这包括账户合约（智能 合约）和外部拥有的账户或 EOA（用户账户，如 您 Metamask 钱包中的账户！）。
 
-8. World State (σ): This is the persistent state of the entire Ethereum system
-   which includes all accounts (no. 7) and their balances, storage, code, etc.
+8. 世界状态 (σ)： 这是整个以太坊系统的持久状态 包括所有账户（no.7）及其余额、存储、代码等。
 
-It's called a "stack-based" architecture because the primary mode of computation
-is through a data stack, which is a last-in, first-out (LIFO) structure.
+之所以称为 "基于堆栈 "的架构，是因为其主要计算模式是通过数据堆栈进行的，而数据堆栈是一种后进先出（LIFO）结构。
 
-Kakarot is a zkEVM built in Cairo. Essentially, this means we've written number
-1 to 8 in Cairo (by relying on existing StarknetOS clients as well). The
-[Geth](https://geth.ethereum.org/) team has done it in Golang. The
-[Reth](https://github.com/paradigmxyz/reth) team has done it in Rust. It just so
-happens that Cairo is provable by design, and the EVM needs to be proven for
-Ethereum to scale! How convenient 🥕.
+Kakarot 是使用 Cairo 构建的 zkEVM。从本质上讲，这意味着我们已经使用 Cairo 将数字 1 到 8 写入了代码（同时依赖现有的 StarknetOS 客户端）。[Geth](https://geth.ethereum.org/) 团队用 Golang 完成了这项任务。[Reth](https://github.com/paradigmxyz/reth) 团队则用 Rust 完成了。恰好，Cairo 是经过设计验证的，而要使以太坊能够扩展，EVM 需要被证明！
 
-## The concept of zk-Rollup
+## zk-Rollup 的概念
 
-The zk in zk-Rollup and zkEVM means _zero-knowledge_. It refers to the
-cryptographic method by which one party (the prover) can prove to another party
-(the verifier) that a statement is true. In the case of an Kakarot zkEVM, the
-prover (the rollup) proves to the verifier (Ethereum L1) that a batch of L2
-transactions are valid. Zk-Rollups help Ethereum mainnet scale through this
-concept of batches: submit less transactions to Ethereum L1, have Ethereum L1
-compute less logic, lower the costs.
+zk-Rollup 和 zkEVM 中的 zk 意味着“零知识”。它指的是一种密码学方法，通过这种方法，一方（证明者）可以向另一方（验证者）证明一个陈述是真实的。在 Kakarot zkEVM 的情况下，证明者（Rollup）向验证者（以太坊 L1）证明一批 L2 交易是有效的。zk-Rollup 通过批处理的概念帮助以太坊主网扩展：向以太坊 L1 提交更少的交易，让以太坊 L1 计算更少的逻辑，从而降低成本。
 
-The integrity of these so-called batches is mathematically guaranteed by
-zero-knowledge proofs (also called validity proofs when they are not privacy
-preserving).
+这些所谓批次的完整性在数学上是由零知识证明保证的(当它们不保护隐私时也称为有效性证明)。
 
-To dive deeper, you can refer to a
-[high-level article about zero-knowledge proofs](https://medium.com/starkware/stark-math-the-journey-begins-51bd2b063c71),
-written by the inventors of STARK proofs: Starkware.
+要深入了解，您可以参考[关于零知识证明的高级文章](https://medium.com/starkware/stark-math-the-journey-begins-51bd2b063c71)， 由STARK证明的发明者Starkware写的。
+要理解 zk-Rollups 的价值，重要的是要理解当在以太坊上执行交易时，网络中的所有完整节点都会在本地运行以验证其完整性。因此，为了保证网络的状态，每个交易都会被执行数十万次。zk-Rollups 的理念是只运行一次交易，计算该交易的完整性证明，然后仅验证该证明，而无需重新运行初始交易。幸运的是（对于我们和以太坊的 Rollup 中心化路线图而言），验证交易证明的成本远远低于重新运行相同交易的成本（渐近地呈指数级下降）。
 
-To grasp the value of zk-Rollups, it is important to understand that when a
-transaction is executed on Ethereum, all the full nodes in the network run it
-locally to verify its integrity. Therefore, each transaction is executed
-hundreds of thousands of times in order to guarantee the network's state. The
-idea behind zk-Rollups is to run a transaction once, compute that transaction's
-proof of integrity and thereafter only verify this proof without re-running the
-initial transaction. Luckily for us (and the Rollup centric roadmap of
-Ethereum), the verification of a transaction's proof is way cheaper than
-re-running that same transaction (it is asymptotically exponentially cheaper).
+由此产生了 zk-Rollups 协议。根据[以太坊网站](https://ethereum.org/developers/docs/scaling/zk-rollups#what-are-zk-rollups)：
 
-From there is derived the protocols of zk-Rollups. As per the
-[Ethereum website](https://ethereum.org/developers/docs/scaling/zk-rollups#what-are-zk-rollups):
+> 零知识rollups（ZK-rollups）将交易捆绑（或 'roll up'）为
+> 在链外执行的批次。链外计算减少了
+> 必须发布到区块链上的数据。ZK-rollup 操作员提交
+> 表示批处理中所有事务所需更改的摘要
+> 而不是单独发送每个交易。它们也产生有效性
+> 证明其更改正确性的证明。
 
-> Zero-knowledge rollups (ZK-rollups) bundle (or 'roll up') transactions into
-> batches that are executed off-chain. Off-chain computation reduces the amount
-> of data that has to be posted to the blockchain. ZK-rollup operators submit a
-> summary of the changes required to represent all the transactions in a batch
-> rather than sending each transaction individually. They also produce validity
-> proofs to prove the correctness of their changes.
+TL;DR - 链下执行，链上验证，节省成本。
 
-TL;DR - execute off-chain, verify on-chain, save on costs.
+## 证明 EVM：从 EVM 到 zkEVM 的过渡意味着什么？
 
-## What does it mean to prove the EVM: the transition from EVM to zkEVM?
+一个 zkEVM 简单来说就是与以太坊兼容的 zk-Rollup。这意味着用户应该能够与之交互，就像他们在与以太坊交互一样（或几乎一样）。例如，用户在 zkEVM 上将使用与以太坊 L1 上相同的工具，例如相同的钱包（如 Metamask）。开发者的智能合约应该能够在 zkEVM 上部署，而无需进行任何（或很少的）更改。
 
-A zkEVM is simply a zk-Rollup that is compatible with Ethereum. This means that
-users should be able to interact with it as if they were interacting with
-Ethereum (or almost). For instance, users will use the same tools on a zkEVM
-than on Ethereum L1, such as the same wallet (e.g. Metamask). Developers' smart
-contracts should be deployable to a zkEVM without any (or little) changes.
+从加密学角度来看，这是非常强大的，因为加密部分被抽象化了。用户继续与他们熟悉的高级抽象层进行交互：即 EVM。在这个意义上，以太坊生态系统中创新的迭代式“基于现有工作”的方面得以保留。
 
-This is powerful in the sense that the cryptography part is abstracted away.
-Users continue to interact with a high-level abstraction they're familiar with:
-the EVM. In that sense, the iterative "build on existing work" aspect of
-innovation is preserved in the Ethereum ecosystem.
+在 zk-Rollup 生态系统中，其他参与者决定重新开始并与 EVM 断开兼容性。其中包括例如由 CairoVM 提供支持的 [Starknet](https://www.starknet.io/en)。Starknet 上的用户和开发者需要习惯使用新的工具和技术，但不必受到 EVM 遗留问题的困扰。Kakarot 则做出了略有不同的选择：EVM 将继续成为加密领域的主要公共抽象层，而 Cairo 将成为最强大的 zkVM。因此，同时进行以下操作是有意义的：
 
-Other actors in the zk-Rollup ecosystem have decided to start over and break
-compatibility with the EVM. This includes for instance
-[Starknet](https://www.starknet.io/en), also powered by the CairoVM. Users and
-developers on Starknet need to get used to using new tools and technologies, but
-do not have to suffer from EVM legacy. Kakarot places a somewhat different bet:
-the EVM will remain the dominant common abstraction layer in crypto and Cairo
-will be the strongest zkVM. Therefore, it makes sense to both:
+- 2024年构建EVM，
+- 在未来的岁月里，把赌注押在开罗这座强国身上。
 
-- build an EVM in 2024,
-- bet on the Cairo powerhouse for the years to come.
+Kakarot用户将同时受益于以太坊网络效应和的创新。
 
-Kakarot users stand to benefit both from the Ethereum network effect and the
-innovations built on the most disruptive zk-toolbox: the CairoVM stack.
+请注意，zkEVM 还指代用于证明与以太坊兼容的交易和区块的软件。它指的是用于从 EVM 交易转换为零知识（或有效性）证明的代码。zkEVM 的实现可以是低级的（在所谓的“circuits”级别）或高级的（使用中间 zkVM）。[Scroll](https://scroll.io/) 是前者的体现，而 Kakarot 是后者的体现。
 
-Note that a zkEVM also designates the software used to prove Ethereum-compatible
-transactions and blocks. It refers to code that is used to go from an EVM
-transaction to a zero-knowledge (or validity) proof. The implementation of a
-zkEVM can be either low-level (at the so-called "circuits" level) or high-level
-(use an intermediary zkVM). [Scroll](https://scroll.io/) is an embodiment of the
-former, and Kakarot of the latter.
-
-TL;DR: Execute Ethereum-compatible transactions on a Layer 2, prove them
-off-chain, bundle and verify them on Ethereum L1. Save on costs, benefit from an
-existing ecosystem: the Ethereum community.
+TL;DR: 在 Layer 2 上执行与以太坊兼容的交易，进行链下证明，将其捆绑并在以太坊 L1 上验证。节省成本，获得现有生态系统的好处：以太坊社区。
