@@ -1,7 +1,6 @@
-# Website
+# 网站
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern
-static website generator.
+该网站使用现代静态网站生成器[Docusaurus 3](https://docusaurus.io/)制作。
 
 ### Installation
 
