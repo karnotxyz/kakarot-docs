@@ -8,7 +8,7 @@ sidebar_position: 2
 
 警告 🚧： RPC 和 Block Explorer 链接尚未建立。
 
-- 🚧 尚未发布 🚧 | 注册页面（用于卡卡罗特邀请阶段）
+- 🚧 尚未发布 🚧 | 注册页面（用于Kakarot邀请阶段）
   Alpha Testnet): https://sepolia-signup.kakarot.org
   - 您需要白名单邀请才能将交易发送到 Kakarot Alpha 测试网📩。
 - 🚧每天前往龙头处获取一些 testnet ETH🚰💧！
