@@ -2,12 +2,9 @@
 sidebar_position: 3
 ---
 
-# Differences between Kakarot and Ethereum
+# Kakarot 与以太坊的区别
 
-Although Kakarot is Ethereum-compatible and aims to support the latest features
-of Ethereum (e.g.
-[Cancun new opcodes](https://blog.ethereum.org/2024/01/10/goerli-dencun-announcement)),
-it still has some edge case behaviors. They are listed below:
+尽管Kakarot兼容以太坊，并旨在支持以太坊的最新功能（例如[Cancun 新操作码](https://blog.ethereum.org/2024/01/10/goerli-dencun-announcement)），但它仍然具有一些特殊情况的行为。它们列举如下：
 
 | Item                   | Ethereum                                                   | Kakarot                                                                                                                                                                               |
 | ---------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

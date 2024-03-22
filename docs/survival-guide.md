@@ -2,18 +2,18 @@
 sidebar_position: 2
 ---
 
-# Kakarot Testnet Survival Guide
+# Kakarot 测试网生存指南
 
-## Useful links
+## 有用的链接
 
-🚧 Warning 🚧: Some links are not up yet.
+🚧 Warning 🚧: 有些链接还没有设置。
 
-- Registration Page (for invite-only phase of the Kakarot
+-  注册页面（仅适用于 Kakarot邀请阶段
   Alpha Testnet): https://sepolia-faucet.kakarot.org/login
-  - You'll need a whitelist invite to be able to send transactions to the
+  -  您需要一个白名单邀请，才能将交易发送到
     Kakarot Alpha Testnet 📩.
 - Faucet: https://sepolia-faucet.kakarot.org
-  - Head out to the faucet once a day to grab some testnet ETH 🚰💧! (⚠️ You need to be whitelisted)
+  -  每天前往龙头处获取一些 testnet ETH 🚰💧！(⚠️ 您需要白名单)
 - 🚧 Not Up Yet 🚧 | Block Explorer: https://sepolia.kakarotscan.org
 - Public RPC: https://sepolia-rpc.kakarot.org
 - Discord: https://discord.gg/kakarotzkevm
@@ -23,21 +23,21 @@ sidebar_position: 2
 
   - RPC Layer:
     - RPC Server: https://github.com/kkrt-labs/kakarot-rpc
-    - Indexer (to store EVM data structures):
+    - 索引器（用于存储 EVM 数据结构）：
       https://github.com/kkrt-labs/kakarot-indexer
-  - Core EVM written in Cairo (two different implementations):
+  - 用Cairo语言编写的核心 EVM（两种不同的实现方法）：
     - Cairo Zero Core EVM: https://github.com/kkrt-labs/kakarot
     - Cairo Core EVM: https://github.com/kkrt-labs/kakarot-ssj
-  - Official Ethereum Foundation test suite implementation:
+  - 以太坊基金会官方测试套件实现：
     - ef-tests: https://github.com/kkrt-labs/ef-tests
   - Documentation repository: https://github.com/kkrt-labs/kakarot-docs
 
 - [Kakarot zkEVM YouTube playlist](https://www.youtube.com/watch?v=5BndqgugKOU&list=PLF3T1714MyKDwjjA8oHizXAdLNx62ka5U)
 
-## Contract address book
+## 合约地址簿
 
-- AMMs: 🚧 Coming Soon 🚧
-- USDc: 🚧 Coming Soon 🚧
-- USDt: 🚧 Coming Soon 🚧
-- WBTC: 🚧 Coming Soon 🚧
-- Oracles: 🚧 Coming Soon 🚧
+- AMMs: 🚧 即将到来 🚧
+- USDc: 🚧 即将到来 🚧
+- USDt: 🚧 即将到来 🚧
+- WBTC: 🚧 即将到来 🚧
+- Oracles: 🚧 即将到来 🚧
