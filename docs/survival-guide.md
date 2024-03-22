@@ -6,14 +6,16 @@ sidebar_position: 2
 
 ## 有用的链接
 
-警告 🚧： RPC 和 Block Explorer 链接尚未建立。
+🚧 Warning 🚧: 有些链接还没有设置。
 
-- 🚧 尚未发布 🚧 | 注册页面（用于Kakarot邀请阶段）
-  Alpha Testnet): https://sepolia-signup.kakarot.org
-  - 您需要白名单邀请才能将交易发送到 Kakarot Alpha 测试网📩。
-- 🚧每天前往龙头处获取一些 testnet ETH🚰💧！
-- 🚧 尚未发布 🚧 | Block Explorer: https://sepolia.kakarotscan.org
-- 🚧 尚未发布 🚧 | Public RPC: https://sepolia-rpc.kakarot.org
+-  注册页面（仅适用于 Kakarot邀请阶段
+  Alpha Testnet): https://sepolia-faucet.kakarot.org/login
+  -  您需要一个白名单邀请，才能将交易发送到
+    Kakarot Alpha Testnet 📩.
+- Faucet: https://sepolia-faucet.kakarot.org
+  -  每天前往龙头处获取一些 testnet ETH 🚰💧！(⚠️ 您需要白名单)
+- 🚧 Not Up Yet 🚧 | Block Explorer: https://sepolia.kakarotscan.org
+- Public RPC: https://sepolia-rpc.kakarot.org
 - Discord: https://discord.gg/kakarotzkevm
 - Twitter: https://twitter.com/kakarotzkevm
 - Official Website: https://kakarot.org

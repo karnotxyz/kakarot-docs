@@ -18,17 +18,54 @@ Kakarot zkEVM是一个以太坊兼容的rollup，这意味着作为用户和开�
 
 前往[生存指南](survival-guide) 部分，查找alpha testnet的有用链接。同样，将钱包中的网络更改为Kakarot，它就会"正常工作"。
 
-示例教程 - 向Metamask添加新网络：打开Metamask扩展。点击"添加网络"。选择"手动添加网络"。然后填写字段：
+#### 添加 Kakarot Sepolia到 Metamask
+
+您可以点击下面的按钮，将 Kakarot Sepolia 添加到 Metamask：
+
+export const AddKakarotNetwork = () => (
+  <button
+    onClick={async () => {
+      const params = [
+        {
+          chainId: "0x6B6B7274",
+          chainName: "Kakarot Sepolia",
+          nativeCurrency: {
+            name: "Ether",
+            symbol: "ETH",
+            decimals: 18,
+          },
+          rpcUrls: ["https://sepolia-rpc.kakarot.org"],
+        },
+      ];
+      try {
+        // Note: if chain is already added, returns `null` and won't error out
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params,
+        });
+      } catch (error) {
+        // TODO: Add User feedback (e.g. Toast message) in case of error
+        console.error(error);
+      }
+    }}
+    className="button button--primary button--lg padding-horiz--lg padding-vert--md margin--md margin-bottom--lg"
+  >
+    🦊 Add Kakarot Sepolia to Metamask 🦊
+  </button>
+);
+
+<AddKakarotNetwork />
+
+或在 Metamask 中手动添加新网络：打开 Metamask 扩展。单击
+"Add Network". 选择 "Add a Network Manually"。然后填写字段：
 
 | Category       | Value                           |
 | -------------- | ------------------------------- |
-| Network Name   | Kakarot zkEVM                   |
+| Network Name   | Kakarot Sepolia                 |
 | RPC URL        | https://sepolia-rpc.kakarot.org |
-| Chain Id       | 10710711648                     |
+| Chain Id       | 1802203764                      |
 | Symbol         | ETH                             |
-| Block Explorer | https://sepolia.kakarotscan.org |
-
-🚧警告🚧:链接尚未建立。
+| Block Explorer | ⚠️ Coming Soon ⚠️               |
 
 ### 作为一名开发人员，我如何在Kakarot zkEVM上进行构建?
 
